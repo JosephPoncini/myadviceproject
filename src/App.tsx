@@ -1,24 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import AdviceComponent from './Components/AdviceComponent';
+import Advice from './Interfaces/interface';
+import getData from './DataServices/DataServices';
 
 function App() {
+
+  const [adviceData, setAdviceData] = useState<Advice>();
+
+  useEffect( () => {
+    const fetchData = async () => {
+        const fetchedData = await getData();
+        setAdviceData(fetchedData);
+    }
+
+    fetchData();
+  },[])
+
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {
+        adviceData && <AdviceComponent  id={adviceData?.slip.id} advice={adviceData?.slip.advice} />        
+      }
+
     </div>
   );
 }
