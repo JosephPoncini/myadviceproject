@@ -8,6 +8,7 @@ import getData from './DataServices/DataServices';
 function App() {
 
   const [adviceData, setAdviceData] = useState<Advice>();
+  let [count, setCount] = useState<number>(0);
 
   useEffect( () => {
     const fetchData = async () => {
@@ -16,19 +17,22 @@ function App() {
     }
 
     fetchData();
-  },[])
+  },[count])
 
-
-
+  const newAdvice = () => {
+    setCount(count+1)
+    console.log(count);
+  }
 
   return (
-    <div className="App">
+    <div className="App bg-DarkBlue h-[100vh] flex justify-center items-center">
       {
-        adviceData && <AdviceComponent  id={adviceData?.slip.id} advice={adviceData?.slip.advice} />        
+        adviceData && <AdviceComponent  id={adviceData.slip.id} advice={adviceData.slip.advice} newAdvice={newAdvice}/>        
       }
 
     </div>
   );
 }
+
 
 export default App;
