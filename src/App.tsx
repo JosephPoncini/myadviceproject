@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import AdviceComponent from './Components/AdviceComponent';
 import Advice from './Interfaces/interface';
